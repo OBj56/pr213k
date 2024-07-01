@@ -19,7 +19,7 @@ namespace pr213k
             Write("2. Exit\n");
 
             string inp = ReadLine();
-
+            // if statement left uninverted
             if (inp == "1")
             {
                 Write("The number of contestants in the previous year: ");
@@ -42,7 +42,6 @@ namespace pr213k
                 {
                     if (compare)
                     {
-                    
                         WriteLine("The competition is bigger than ever!");
                     }
                     else
