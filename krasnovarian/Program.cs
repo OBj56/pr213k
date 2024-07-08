@@ -1,7 +1,17 @@
 ﻿using System;
 using static System.Console;
+using System.Linq;
+using System.Text.RegularExpressions;
 
-// again 0 error handling will add soon
+/* somewhat average but not full error handling in this version 
+
+Main changes are that if any values such as "ewwrewrwet425" the numeric output in this case being 
+
+425 the numeric value only will be extracted, whereas if something like "asfdsff" is entered an error message
+
+is thrown and it prompts the user to renter (handler seen starting from line 75)
+
+*/
 
 namespace pr213k
 {
@@ -18,15 +28,15 @@ namespace pr213k
             Write("1. CALCULATE Greenville Revenue Year-Over-Year\n");
             Write("2. Exit\n");
 
-            string inp = ReadLine();
-            // if statement left uninverted
+            var inp = ReadLine();
+
             if (inp == "1")
             {
-                Write("The number of contestants in the previous year: ");
-                int prevy = int.Parse(ReadLine());
+                int prevy = Readnumbersonly("The number of contestants in the previous year: ");
+               
 
-                Write("The number of contestants in the current year: ");
-                int currentyearsports = int.Parse(ReadLine());
+                int currentyearsports = Readnumbersonly("The number of contestants in the current year: ");
+
                 WriteLine();
 
                 WriteLine($"Last year's competition had {prevy} contestants, and this year's has {currentyearsports} contestants");
@@ -61,5 +71,26 @@ namespace pr213k
 
             ReadKey();
         }
+
+        private static int Readnumbersonly(string prompt)
+        {
+            int value;
+            while (true)
+            {
+                Write(prompt);
+                string input = ReadLine();
+                if (int.TryParse(Regex.Match(input, @"\d+").Value, out value))
+                {
+                    return value;
+                }
+                else
+                {
+                    WriteLine();
+                    WriteLine("Invalid input. Please enter a numeric value.");
+                    WriteLine();
+                }
+            }
+        }
     }
 }
+
