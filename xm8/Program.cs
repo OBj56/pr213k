@@ -32,7 +32,7 @@ namespace pr213k
                     }
                     else
                     {
-                        WriteLine("Error. Please enter a number between 0 and 30.");
+                        WriteLine("Invalid input. Please enter a number between 0 and 30.");
                     }
                 } while (!validPrevYearInput);
 
@@ -64,17 +64,15 @@ namespace pr213k
                 {
                     WriteLine("The competition is more than twice as big this year!");
                 }
+                else if (compare)
+                {
+                    WriteLine("The competition is bigger than ever!");
+                }
                 else
                 {
-                    if (compare)
-                    {
-                        WriteLine("The competition is bigger than ever!");
-                    }
-                    else
-                    {
-                        WriteLine("A tighter race this year! Come out and cast your vote!");
-                    }
+                    WriteLine("A tighter race this year! Come out and cast your vote!");
                 }
+
             }
             else if (inp == "2")
             {
