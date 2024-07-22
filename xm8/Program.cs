@@ -1,7 +1,5 @@
 ﻿using System;
 using static System.Console;
-using System.Linq;
-using System.Text.RegularExpressions;
 
 namespace pr213k
 {
@@ -19,11 +17,38 @@ namespace pr213k
             Write("2. Exit\n");
 
             var inp = ReadLine();
-
             if (inp == "1")
             {
-                int prevy = ReadNumericInput("The number of contestants in the previous year: ", 0, 30);
-                int currentyearsports = ReadNumericInput("The number of contestants in the current year: ", 0, 30);
+                int prevy, currentyearsports;
+                var validPrevYearInput = false;
+                var validCurrentYearInput = false;
+
+                do
+                {
+                    Write("The number of contestants in the previous year (0-30): ");
+                    if (int.TryParse(ReadLine(), out prevy) && prevy >= 0 && prevy <= 30)
+                    {
+                        validPrevYearInput = true;
+                    }
+                    else
+                    {
+                        WriteLine("Invalid input. Please enter a number between 0 and 30 (inclusive).");
+                    }
+                } while (!validPrevYearInput);
+
+                do
+                {
+                    Write("The number of contestants in the current year (0-30): ");
+                    if (int.TryParse(ReadLine(), out currentyearsports) && currentyearsports >= 0 && currentyearsports <= 30)
+                    {
+                        validCurrentYearInput = true;
+                    }
+                    else
+                    {
+                        WriteLine("Invalid input. Please enter a number between 0 and 30 (inclusive).");
+                    }
+                } while (!validCurrentYearInput);
+
                 WriteLine();
 
                 WriteLine($"Last year's competition had {prevy} contestants, and this year's has {currentyearsports} contestants");
@@ -57,24 +82,6 @@ namespace pr213k
             }
 
             ReadKey();
-        }
-
-        static int ReadNumericInput(string prompt, int minValue, int maxValue)
-        {
-            int value;
-            while (true)
-            {
-                Write(prompt);
-                string input = ReadLine();
-                if (int.TryParse(Regex.Match(input, @"\d+").Value, out value) && value >= minValue && value <= maxValue)
-                {
-                    return value;
-                }
-                else
-                {
-                    WriteLine($"Invalid input. Please enter a numeric value between {minValue} and {maxValue} (inclusive).");
-                }
-            }
         }
     }
 }
