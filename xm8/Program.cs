@@ -20,32 +20,32 @@ namespace pr213k
             if (inp == "1")
             {
                 int prevy, currentyearsports;
-                var validPrevYearInput = false;
-                var validCurrentYearInput = false;
+                bool validPrevYearInput = false;
+                bool validCurrentYearInput = false;
 
                 do
                 {
-                    Write("The number of contestants in the previous year (0-30): ");
+                    Write("The number of contestants in the previous year: ");
                     if (int.TryParse(ReadLine(), out prevy) && prevy >= 0 && prevy <= 30)
                     {
                         validPrevYearInput = true;
                     }
                     else
                     {
-                        WriteLine("Invalid input. Please enter a number between 0 and 30 (inclusive).");
+                        WriteLine("Error. Please enter a number between 0 and 30.");
                     }
                 } while (!validPrevYearInput);
 
                 do
                 {
-                    Write("The number of contestants in the current year (0-30): ");
+                    Write("The number of contestants in the current year: ");
                     if (int.TryParse(ReadLine(), out currentyearsports) && currentyearsports >= 0 && currentyearsports <= 30)
                     {
                         validCurrentYearInput = true;
                     }
                     else
                     {
-                        WriteLine("Invalid input. Please enter a number between 0 and 30 (inclusive).");
+                        WriteLine("Error. Please enter a number between 0 and 30.");
                     }
                 } while (!validCurrentYearInput);
 
@@ -60,7 +60,11 @@ namespace pr213k
                 bool larger = currentyearsports > (2 * prevy);
                 bool compare = currentyearsports > prevy;
 
-                if (!larger)
+                if (larger)
+                {
+                    WriteLine("The competition is more than twice as big this year!");
+                }
+                else
                 {
                     if (compare)
                     {
@@ -70,10 +74,6 @@ namespace pr213k
                     {
                         WriteLine("A tighter race this year! Come out and cast your vote!");
                     }
-                }
-                else
-                {
-                    WriteLine("The competition is more than twice as big this year!");
                 }
             }
             else if (inp == "2")
